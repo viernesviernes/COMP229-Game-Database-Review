@@ -1,0 +1,97 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .logo a {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .navLinks a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .navLinks a:hover {
+    text-decoration: underline;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  
+  .dropdownContent a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px 20px;
+  }
+  
+  .dropdownContent a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .dropdown:hover .dropdownContent {
+    display: block;
+  }
+  
+  .authButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .loginButton,
+  .signupButton {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .loginButton:hover,
+  .signupButton:hover {
+    background-color: #d4d4d4;
+  }
+  
+  .signupButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .signupButton:hover {
+    background-color: #0056b3;
+  }
+  

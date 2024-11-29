@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
+import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
-import styles from './login.module.css'; 
+import styles from './login.module.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     const result = await login(username, password);
     if (result.success) {
-      navigate('/dashboard');
+      navigate('/home');
     } else {
       setError(result.error);
     }
@@ -29,55 +30,58 @@ const Login = () => {
   };
 
   return (
-    <div className={`${styles.loginContainer} ${styles[theme]}`}>
-      <div className={styles.loginCard}>
-        <h1 className={styles.title}>Welcome Back</h1>
-        {error && <p className={styles.error}>{error}</p>}
-        <form onSubmit={handleLogin} className={styles.form}>
-          <div className={styles.inputGroup}>
-            <FaUser className={styles.icon} />
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <FaLock className={styles.icon} />
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className={styles.showPassword}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+    <>
+      <Navbar />
+      <div className={`${styles.loginContainer} ${styles[theme]}`}>
+        <div className={styles.loginCard}>
+          <h1 className={styles.title}>Welcome Back</h1>
+          {error && <p className={styles.error}>{error}</p>}
+          <form onSubmit={handleLogin} className={styles.form}>
+            <div className={styles.inputGroup}>
+              <FaUser className={styles.icon} />
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <FaLock className={styles.icon} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className={styles.showPassword}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            <button type="submit" className={styles.loginButton}>
+              Log In
             </button>
+          </form>
+          <div className={styles.divider}>
+            <span>or</span>
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Log In
+          <button onClick={handleGoogleLogin} className={styles.googleButton}>
+            <FaGoogle className={styles.googleIcon} />
+            Continue with Google
           </button>
-        </form>
-        <div className={styles.divider}>
-          <span>or</span>
+          <p className={styles.signupPrompt}>
+            Don't have an account?{' '}
+            <span onClick={() => navigate('/signup')}>Sign up</span>
+          </p>
         </div>
-        <button onClick={handleGoogleLogin} className={styles.googleButton}>
-          <FaGoogle className={styles.googleIcon} />
-          Continue with Google
-        </button>
-        <p className={styles.signupPrompt}>
-          Don't have an account?{' '}
-          <span onClick={() => navigate('/signup')}>Sign up</span>
-        </p>
       </div>
-    </div>
+    </>
   );
 };
 
