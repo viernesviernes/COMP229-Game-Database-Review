@@ -1,198 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 .signupContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    width: 100vw;
-    background: var(--bg);
-    transition: background 0.3s ease;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f0f2f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.signupCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 26px;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.inputGroup input::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+  font-size: 18px;
+}
+
+.showPassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.signupButton, .googleButton {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.signupButton {
+  background: #007bff; /* blue background */
+  color: #fff; /* white text */
+}
+
+.signupButton:hover {
+  background: #0056b3; /* darker blue on hover */
+}
+
+.googleButton {
+  background: #f9f9f9; /* white background */
+  color: #333; /* dark text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d1d5db; /* gray border */
+  margin-top: 15px;
+}
+
+.googleButton:hover {
+  background: #e0e0e0; /* slightly darker background */
+}
+
+.googleIcon {
+  font-size: 18px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.divider span {
+  padding: 0 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.loginPrompt {
+  text-align: center;
+  margin-top: 15px;
+  color: #333;
+  font-size: 14px;
+}
+
+.loginPrompt span {
+  color: #007bff; /* blue link */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.loginPrompt span:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #e74c3c; /* error color */
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
   .signupCard {
-    background: var(--bg2);
-    border-radius: 20px;
-    padding: 40px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
   }
-  
-  .signupCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  }
-  
+
   .title {
-    font-size: 28px;
-    color: var(--text);
-    margin-bottom: 30px;
-    text-align: center;
+    font-size: 24px;
   }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .inputGroup {
-    position: relative;
-  }
-  
+
   .inputGroup input {
-    width: 100%;
-    padding: 15px 15px 15px 50px;
-    border: none;
-    border-radius: 10px;
-    background: var(--bg);
-    color: var(--text);
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .icon, .showPassword {
     font-size: 16px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-  
   }
-  
-  .inputGroup input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--primary);
-  }
-  
-  .icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--primary);
-    font-size: 20px;
-  }
-  
-  .showPassword {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
+
   .signupButton, .googleButton {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-  
-  }
-  
-  .signupButton {
-    background: var(--primary);
-    color: var(--bg);
-  }
-  
-  .signupButton:hover {
-    background: var(--secondary);
-  }
-  
-  .googleButton {
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .googleButton:hover {
-    background: var(--hover);
-  }
-  
-  .googleIcon {
-    font-size: 20px;
-  }
-  
-  .divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  .divider::before,
-  .divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid var(--text);
-  }
-  
-  .divider span {
-    padding: 0 10px;
-    color: var(--text);
-    font-size: 14px;
-    box-sizing: border-box;
-  
-  }
-  
-  .loginPrompt {
-    text-align: center;
-    margin-top: 20px;
-    color: var(--text);
+    padding: 12px;
     font-size: 14px;
   }
-  
-  .loginPrompt span {
-    color: var(--primary);
-    cursor: pointer;
-    font-weight: 600;
-  }
-  
-  .loginPrompt span:hover {
-    text-decoration: underline;
-  }
-  
-  .error {
-    color: var(--error-color);
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
-  
-  @media (max-width: 768px) {
-    .signupCard {
-      padding: 30px;
-      border-radius: 15px;
-      box-sizing: border-box;
-  
-    }
-  
-    .title {
-      font-size: 24px;
-    }
-  
-    .inputGroup input {
-      padding: 12px 12px 12px 40px;
-      font-size: 14px;
-      box-sizing: border-box;
-  
-    }
-  
-    .icon, .showPassword {
-      font-size: 18px;
-    }
-  
-    .signupButton, .googleButton {
-      padding: 12px;
-      font-size: 14px;
-      box-sizing: border-box;
-  
-    }
-  }
+}
