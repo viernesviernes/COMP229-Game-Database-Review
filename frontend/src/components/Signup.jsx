@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { ThemeContext } from "../ColorTheme";
 import { UserContext } from "../UserContext";
+import { GoogleLogin } from "@react-oauth/google";
 import Navbar from "./Navbar"; // Import your Navbar component
 import styles from "./signup.module.css";
 
@@ -31,15 +32,21 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSignup = () => {
-    console.log("Google signup button clicked");
+  const handleGoogleSignupSuccess = (credentialResponse) => {
+    console.log("Google Signup Successful:", credentialResponse);
+    // Send credentialResponse.credential to your backend for user creation or validation
+    navigate("/home");
+  };
+
+  const handleGoogleSignupError = () => {
+    console.error("Google Signup Failed");
+    setError("Google Signup failed. Please try again.");
   };
 
   return (
     <>
       <Navbar />
       <div className={`${styles.signupContainer} ${styles[theme]}`}>
-        {/* Add Navbar at the top */}
         <div className={styles.signupCard}>
           <h1 className={styles.title}>Create Account</h1>
           {error && <p className={styles.error}>{error}</p>}
@@ -95,10 +102,20 @@ const Signup = () => {
           <div className={styles.divider}>
             <span>or</span>
           </div>
-          <button onClick={handleGoogleSignup} className={styles.googleButton}>
-            <FaGoogle className={styles.googleIcon} />
-            Sign up with Google
-          </button>
+          <GoogleLogin
+            onSuccess={handleGoogleSignupSuccess}
+            onError={handleGoogleSignupError}
+            render={(renderProps) => (
+              <button
+                className={styles.googleButton}
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <FaGoogle className={styles.googleIcon} />
+                Sign up with Google
+              </button>
+            )}
+          />
           <p className={styles.loginPrompt}>
             Already have an account?{" "}
             <span onClick={() => navigate("/login")}>Log in</span>

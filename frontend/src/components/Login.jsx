@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import styles from './login.module.css';
 
 const Login = () => {
@@ -25,8 +26,15 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Google login button clicked');
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    console.log('Google Login Successful:', credentialResponse);
+    // Send credentialResponse.credential to your backend for validation
+    navigate('/home');
+  };
+
+  const handleGoogleLoginError = () => {
+    console.error('Google Login Failed');
+    setError('Google Login failed. Please try again.');
   };
 
   return (
@@ -71,10 +79,20 @@ const Login = () => {
           <div className={styles.divider}>
             <span>or</span>
           </div>
-          <button onClick={handleGoogleLogin} className={styles.googleButton}>
-            <FaGoogle className={styles.googleIcon} />
-            Continue with Google
-          </button>
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginError}
+            render={(renderProps) => (
+              <button
+                className={styles.googleButton}
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <FaGoogle className={styles.googleIcon} />
+                Continue with Google
+              </button>
+            )}
+          />
           <p className={styles.signupPrompt}>
             Don't have an account?{' '}
             <span onClick={() => navigate('/signup')}>Sign up</span>
