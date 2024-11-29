@@ -112,7 +112,7 @@ const Signup = () => {
                 disabled={renderProps.disabled}
               >
                 <FaGoogle className={styles.googleIcon} />
-                Sign up with Google
+                Continue with Google {/* Updated text here */}
               </button>
             )}
           />
