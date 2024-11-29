@@ -3,20 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
-import styles from './login.module.css'; 
+import styles from './signup.module.css';
 
-const Login = () => {
+const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login } = useContext(UserContext);
+  const { signup } = useContext(UserContext);
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    const result = await login(username, password);
+    if (password !== confirmPassword) {
+      setError("Passwords don't match");
+      return;
+    }
+    const result = await signup(username, password);
     if (result.success) {
       navigate('/dashboard');
     } else {
@@ -24,16 +30,16 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    console.log('Google login button clicked');
+  const handleGoogleSignup = () => {
+    console.log('Google signup button clicked');
   };
 
   return (
-    <div className={`${styles.loginContainer} ${styles[theme]}`}>
-      <div className={styles.loginCard}>
-        <h1 className={styles.title}>Log In</h1>
+    <div className={`${styles.signupContainer} ${styles[theme]}`}>
+      <div className={styles.signupCard}>
+        <h1 className={styles.title}>Create Account</h1>
         {error && <p className={styles.error}>{error}</p>}
-        <form onSubmit={handleLogin} className={styles.form}>
+        <form onSubmit={handleSignup} className={styles.form}>
           <div className={styles.inputGroup}>
             <FaUser className={styles.icon} />
             <input
@@ -61,24 +67,41 @@ const Login = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Log In
+          <div className={styles.inputGroup}>
+            <FaLock className={styles.icon} />
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className={styles.showPassword}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+          <button type="submit" className={styles.signupButton}>
+            Sign Up
           </button>
         </form>
         <div className={styles.divider}>
           <span>or</span>
         </div>
-        <button onClick={handleGoogleLogin} className={styles.googleButton}>
+        <button onClick={handleGoogleSignup} className={styles.googleButton}>
           <FaGoogle className={styles.googleIcon} />
-          Continue with Google
+          Sign up with Google
         </button>
-        <p className={styles.signupPrompt}>
-          Don't have an account?{' '}
-          <span onClick={() => navigate('/signup')}>Sign up</span>
+        <p className={styles.loginPrompt}>
+          Already have an account?{' '}
+          <span onClick={() => navigate('/login')}>Log in</span>
         </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

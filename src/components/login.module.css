@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f0f2f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.loginCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 26px;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.inputGroup input::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+  font-size: 18px;
+}
+
+.inputGroup input:focus::placeholder {
+  opacity: 0;
+}
+
+.showPassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.loginButton, .googleButton {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.loginButton {
+  background: #007bff; /* blue background */
+  color: #fff; /* white text */
+}
+
+.loginButton:hover {
+  background: #0056b3; /* darker blue on hover */
+}
+
+.googleButton {
+  background: #f9f9f9; /* white background */
+  color: #333; /* dark text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d1d5db; /* gray border */
+  margin-top: 15px;
+}
+
+.googleButton:hover {
+  background: #e0e0e0; /* slightly darker background */
+}
+
+.googleIcon {
+  font-size: 18px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.divider span {
+  padding: 0 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.signupPrompt {
+  text-align: center;
+  margin-top: 15px;
+  color: #333;
+  font-size: 14px;
+}
+
+.signupPrompt span {
+  color: #007bff; /* blue link */
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.signupPrompt span:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #e74c3c; /* error color */
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .loginCard {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .inputGroup input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .icon, .showPassword {
+    font-size: 16px;
+  }
+
+  .loginButton, .googleButton {
+    padding: 12px;
+    font-size: 14px;
+  }
+}

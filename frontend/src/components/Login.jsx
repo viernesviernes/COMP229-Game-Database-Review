@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <div className={`${styles.loginContainer} ${styles[theme]}`}>
       <div className={styles.loginCard}>
-        <h1 className={styles.title}>Log In</h1>
+        <h1 className={styles.title}>Welcome Back</h1>
         {error && <p className={styles.error}>{error}</p>}
         <form onSubmit={handleLogin} className={styles.form}>
           <div className={styles.inputGroup}>
