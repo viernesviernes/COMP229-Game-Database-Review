@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext'; // Adjust path as needed
 import styles from './navbar.module.css';
 
 const Navbar = () => {
+  const { user, logout } = useContext(UserContext);
+
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-      <img src="GameSphere.png" alt="GameSphere Logo" className={styles.logoImage} />
-        <Link to="/">Game Database</Link>
-        
+        <img src="GameSphere.png" alt="GameSphere Logo" className={styles.logoImage} />
+        <Link to="/home">Game Database</Link>
       </div>
       <div className={styles.navLinks}>
         <Link to="/games">Games</Link>
@@ -24,12 +26,25 @@ const Navbar = () => {
         <Link to="/newest">Newest Additions</Link>
       </div>
       <div className={styles.authButtons}>
-        <Link to="/login" className={styles.loginButton}>
-          Log In
-        </Link>
-        <Link to="/signup" className={styles.signupButton}>
-          Sign Up
-        </Link>
+        {!user ? (
+          <>
+            <Link to="/login" className={styles.loginButton}>
+              Log In
+            </Link>
+            <Link to="/signup" className={styles.signupButton}>
+              Sign Up
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to={`/profile/${user.username}`} className={styles.profileButton}>
+              Profile
+            </Link>
+            <button onClick={logout} className={styles.logoutButton}>
+              Logout
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
