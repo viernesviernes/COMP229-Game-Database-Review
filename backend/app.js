@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const express = require("express");
 const cors = require("cors");
+const axios = require('axios');
 
 const app = express();
 
@@ -113,4 +114,12 @@ app.post("/api/favorites/:username", async (req, res) => {
 });
 
 // // // API REQUESTS
-// app.get("/api/")
+
+// Retrieve id
+app.get("/api/games/id/:id", async (req, res) => {
+  const { id } = req.params;
+  axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.API_KEY}`)
+  .then((response) => {
+    res.json(response.data);
+  })
+})
