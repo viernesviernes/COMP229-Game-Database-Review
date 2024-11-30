@@ -1,10 +1,13 @@
 import React from 'react';
+import Navbar from './Navbar';
 import './HomePage.css'; // Import the CSS for styling
 
 const HomePage = () => {
   return (
+    <>
+    <Navbar />
     <div className="home-container">
-      <header className="header">
+      {/* <header className="header">
         <div className="logo">Game Database</div>
         <nav className="nav-links">
           <a href="/games">Games</a>
@@ -17,7 +20,7 @@ const HomePage = () => {
           <button className="favorites">⭐ Favorites</button>
           <button className="profile">👤</button>
         </div>
-      </header>
+      </header> */}
       <main className="main-content">
         <div className="welcome-message">
           <h1>The Game Database</h1>
@@ -32,6 +35,7 @@ const HomePage = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 

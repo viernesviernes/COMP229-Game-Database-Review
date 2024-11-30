@@ -6,6 +6,16 @@
     padding: 10px 20px;
     font-family: Arial, sans-serif;
   }
+
+  .useractions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .useractions button {
+    border: none;
+    background: none;
+  }
   
   .logo a {
     font-weight: bold;

@@ -23,6 +23,9 @@ const Navbar = () => {
         <Link to="/latest">Latest</Link>
         <Link to="/newest">Newest Additions</Link>
       </div>
+      
+      {/* ADD CONDITIONALS HERE */}
+
       <div className={styles.authButtons}>
         <Link to="/login" className={styles.loginButton}>
           Log In
@@ -30,6 +33,11 @@ const Navbar = () => {
         <Link to="/signup" className={styles.signupButton}>
           Sign Up
         </Link>
+      </div>
+      <div className={styles.useractions}>
+          <button className="notifications">🔔 Notifications</button>
+          <button className="favorites">⭐ Favorites</button>
+          <button className="profile">👤</button>
       </div>
     </div>
   );
