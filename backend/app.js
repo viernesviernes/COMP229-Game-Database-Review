@@ -30,6 +30,8 @@ app.get("/api/test", async (req, res) => {
   res.json(json);
 });
 
+// // // LOGIN AND SIGNUP
+
 app.post("/signup", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -78,6 +80,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// // // BACKEND REQUESTS
+
 // Get profile details via username
 app.get("/api/profile/:username", async (req, res) => {
   const { username } = req.params;
@@ -107,3 +111,6 @@ app.post("/api/favorites/:username", async (req, res) => {
   
   res.send(send);
 });
+
+// // // API REQUESTS
+// app.get("/api/")
