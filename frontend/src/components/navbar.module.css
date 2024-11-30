@@ -32,7 +32,11 @@
   .navLinks a:hover {
     text-decoration: underline;
   }
-  
+  .logo img {
+    width: 30px; /* Adjust size */
+    height: auto;
+    margin-right: 10px; /* Space between logo and text */
+  }
   .dropdown {
     position: relative;
     display: inline-block;

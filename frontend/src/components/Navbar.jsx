@@ -7,6 +7,7 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.logo}>
         <Link to="/">Game Database</Link>
+        <img src="GameSphere.png" alt="GameSphere Logo" className={styles.logoImage} />
       </div>
       <div className={styles.navLinks}>
         <Link to="/games">Games</Link>
