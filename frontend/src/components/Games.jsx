@@ -31,8 +31,9 @@ const Games = () => {
   }, [query, page]);
 
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
-      <Navbar /> {/* Add Navbar here */}
       <div className={styles.searchBar}>
         <input
           type="text"
@@ -77,6 +78,7 @@ const Games = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

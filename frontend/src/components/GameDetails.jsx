@@ -36,8 +36,9 @@ const GameDetails = () => {
   }
 
   return (
+    <>
+    <Navbar />
     <div className={styles.container}>
-      <Navbar /> {/* Add Navbar here */}
       <h1>{gameDetails.name}</h1>
       <img
         src={gameDetails.background_image}
@@ -52,6 +53,7 @@ const GameDetails = () => {
         <p><strong>Description:</strong> {gameDetails.description_raw}</p>
       </div>
     </div>
+    </>
   );
 };
 

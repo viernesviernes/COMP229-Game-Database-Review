@@ -7,7 +7,6 @@ const HomePage = () => {
     <>
     <Navbar />
     <div className="home-container">
-      <Navbar /> {/* Reuse the Navbar component */}
       <main className="main-content">
         <div className="welcome-message">
           <h1>The Game Database</h1>

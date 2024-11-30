@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../UserContext'; // Adjust path as needed
+import { UserContext } from '../UserContext';
 import styles from './navbar.module.css';
 
 const Navbar = () => {
@@ -48,11 +48,6 @@ const Navbar = () => {
             </button>
           </>
         )}
-      </div>
-      <div className={styles.useractions}>
-          <button className="notifications">🔔 Notifications</button>
-          <button className="favorites">⭐ Favorites</button>
-          <button className="profile">👤</button>
       </div>
     </div>
   );
