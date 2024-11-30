@@ -3,6 +3,8 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import HomePage from "./components/HomePage";
+import Games from "./components/Games"; 
+import GameDetails from "./components/GameDetails";
 import { ThemeProvider } from "./ColorTheme";
 import { UserProvider } from "./UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -19,6 +21,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile/*" element={<Profile />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/games/:id" element={<GameDetails />} />
           </Routes>
         </UserProvider>
       </ThemeProvider>
