@@ -25,8 +25,8 @@ client.connect().then(() => {
 
 // Routes
 
-app.get("/api/test", (req, res) => {
-  const json = gamesCollection.find().toArray();
+app.get("/api/test", async (req, res) => {
+  const json = await gamesCollection.find().toArray();
   res.json(json);
 });
 
@@ -76,4 +76,34 @@ app.post("/login", async (req, res) => {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Error logging in" });
   }
+});
+
+// Get profile details via username
+app.get("/api/profile/:username", async (req, res) => {
+  const { username } = req.params;
+  let json = await gamesCollection.find({ username: username }).toArray();
+  res.status(200).json(json);
+})
+
+// Add id to favorites:
+app.post("/api/favorites/:username", async (req, res) => {
+  const { username } = req.params;
+  const { id } = req.body;
+
+  let [ json ] = await gamesCollection.find({ username: username }).toArray();
+  
+  let send;
+
+  console.log(json.favorites);
+
+  if (!json.favorites.includes(id)) {
+    send = await gamesCollection.updateOne(
+      { username: username },
+      { $push: {favorites: id }}
+    );
+  } else {
+    send = {error: `${id} already exists in the profile.`}
+  }
+  
+  res.send(send);
 });
