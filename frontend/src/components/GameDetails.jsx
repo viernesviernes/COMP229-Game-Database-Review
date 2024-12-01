@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./gameDetails.module.css";
 import Navbar from './Navbar'; // Import Navbar
+import { UserContext } from '../UserContext';
 
 const GameDetails = () => {
   const { id } = useParams(); // Retrieve the game ID from the URL
+  const { user } = useContext(UserContext); // Access the user data from UserContext
   const [gameDetails, setGameDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false); // Track if game is in favorites
 
   const fetchGameDetails = async () => {
     setLoading(true);
@@ -22,6 +25,29 @@ const GameDetails = () => {
       setLoading(false);
     }
   };
+
+  const addToFavourites = async () => {
+    try{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/favorites/${user.username}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: gameDetails.id }),
+        });
+        const result = await response.json();
+  
+        if (response.ok) {
+          setIsFavorite(true);
+          alert("Game added to favorites!");
+        } else {
+          alert(result.error || "Failed to add to favorites.");
+        }
+    }
+    catch(error){
+      console.error("Error adding to favorites:", error);
+    }
+  }
 
   useEffect(() => {
     fetchGameDetails();
@@ -45,6 +71,7 @@ const GameDetails = () => {
         alt={gameDetails.name}
         className={styles.gameImage}
       />
+      <button onClick={addToFavourites}  disabled={isFavorite}>{isFavorite ? "Added to Favorites" : "Add to Favorites"}</button>
       <div className={styles.details}>
         <p><strong>Release Date:</strong> {gameDetails.released}</p>
         <p><strong>Rating:</strong> {gameDetails.rating}</p>
