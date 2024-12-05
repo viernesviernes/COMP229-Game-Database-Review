@@ -23,7 +23,7 @@
 }
 
 /* Add to Favorites button */
-button {
+.favourites button {
   margin: 20px auto; /* Space between image and button */
   display: block; /* Center the button */
   padding: 10px 20px;
@@ -37,17 +37,17 @@ button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
+.favourites button:hover {
   background-color: #985ecf; /* Slightly darker shade on hover */
   transform: scale(1.05); /* Subtle scale effect */
 }
 
-button:disabled {
+.favourites button:disabled {
   background-color: #666666; /* Gray for disabled state */
   cursor: not-allowed;
 }
 
-button:disabled:hover {
+.favourites button:disabled:hover {
   transform: none; /* No scaling for disabled state */
 }
 

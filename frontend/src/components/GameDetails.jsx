@@ -71,7 +71,9 @@ const GameDetails = () => {
         alt={gameDetails.name}
         className={styles.gameImage}
       />
+      <div className={styles.favourites}> 
       <button onClick={addToFavourites}  disabled={isFavorite}>{isFavorite ? "Added to Favorites" : "Add to Favorites"}</button>
+      </div>
       <div className={styles.details}>
         <p><strong>Release Date:</strong> {gameDetails.released}</p>
         <p><strong>Rating:</strong> {gameDetails.rating}</p>
