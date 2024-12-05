@@ -1,143 +1,190 @@
+/* Body styles for the entire page */
+body {
+  background-color: #121212;
+  font-family: 'Arial', sans-serif;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* General container for the entire page */
 .container {
-    padding: 20px;
-    background-color: #f5f5f5;
-  }
-  
-  /* Search bar container */
-  .searchBar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .searchBar input {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 250px;
-  }
-  
-  .searchBar button {
-    padding: 8px 16px;
-    margin-left: 10px;
-    font-size: 16px;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .searchBar button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Style for game cards */
-  .gamesList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-  }
-  
-  /* Each individual game card */
-  .gameCard {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 250px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .gameCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Image inside each game card */
-  .gameImage {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-bottom: 2px solid #f1f1f1;
-  }
-  
-  /* Game name and text inside the card */
-  .gameCard h3 {
-    font-size: 18px;
-    color: #333;
-    margin: 10px;
-    text-align: center;
-  }
-  
-  .gameCard p {
-    font-size: 14px;
-    color: #777;
-    margin: 5px 10px;
-  }
-  
-  /* Read more link */
-  .readMore {
-    display: block;
-    text-align: center;
-    color: #007bff;
-    font-weight: bold;
-    margin: 10px 0;
-  }
-  
-  .readMore:hover {
-    text-decoration: underline;
-  }
-  
-  /* Pagination container */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .pagination button {
-    padding: 8px 16px;
-    margin: 0 10px;
-    font-size: 16px;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #007bff;
-    cursor: pointer;
-  }
-  
-  .pagination button:disabled {
-    background-color: #ccc;
-    color: #777;
-    cursor: not-allowed;
-  }
-  
-  .pagination button:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Sort and filter options */
-  .sortFilter {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
-  }
-  
-  .sortFilter span {
-    margin-left: 20px;
-    cursor: pointer;
-  }
-  
-  .sortFilter span:hover {
-    color: #007bff;
-  }
-  
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #121212;
+}
+
+/* Search bar container */
+/* Search bar container */
+.searchBar {
+  display: flex;
+  justify-content: center;  /* Centers the input and button horizontally */
+  align-items: center;      /* Aligns input and button vertically */
+  margin-bottom: 20px;
+  width: 100%;              /* Ensures the container spans full width */
+  max-width: 400px;         /* Limits the maximum width of the search bar */
+  margin-left: auto;        /* Centers the search bar horizontally within its parent */
+  margin-right: auto;
+}
+
+/* Input field styling */
+.searchBar input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 25px 0 0 25px; /* Rounded left corner */
+  width: 100%;                   /* Makes input take up all available space */
+  max-width: 300px;              /* Maximum width for input */
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* Placeholder text */
+.searchBar input::placeholder {
+  color: #777;
+}
+
+/* Focus styling for input */
+.searchBar input:focus {
+  outline: none;
+  border: 1px solid #6200ea;
+}
+
+/* Button styling */
+.searchBar button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 0 25px 25px 0; /* Rounded right corner */
+  background-color: #6200ea;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.searchBar button:hover {
+  background-color: #3700b3;
+}
+
+/* Style for game cards */
+.gamesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+/* Each individual game card */
+.gameCard {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gameCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* Image inside each game card */
+.gameImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid #333;
+}
+
+/* Game name and text inside the card */
+.gameCard h3 {
+  font-size: 18px;
+  color: #d1c4e9; /* Light lavender for a softer look */
+  margin: 15px 10px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Subtle shadow */
+}
+.gameLink {
+  font-size: 18px;
+  color: #ffffff; /* Soft gold for better readability */
+  margin: 15px 10px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+
+.gameCard p {
+  font-size: 14px;
+  color: #999;
+  margin: 5px 10px;
+  text-align: center;
+}
+
+/* Read more link */
+.readMore {
+  display: block;
+  text-align: center;
+  color: #bb86fc;
+  font-weight: bold;
+  margin: 10px 0 15px;
+}
+
+.readMore:hover {
+  text-decoration: underline;
+  color: #6200ea;
+}
+
+/* Pagination container */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  background-color: #1e1e1e;
+  color: #bb86fc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #6200ea;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #333;
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* Sort and filter options */
+.sortFilter {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 16px;
+  color: #e0e0e0;
+  margin-top: 10px;
+}
+
+.sortFilter span {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.sortFilter span:hover {
+  color: #bb86fc;
+}

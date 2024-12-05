@@ -5,6 +5,7 @@ import Signup from "./components/Signup";
 import HomePage from "./components/HomePage";
 import Games from "./components/Games"; 
 import GameDetails from "./components/GameDetails";
+import Latest from "./components/Latest"; 
 import { ThemeProvider } from "./ColorTheme";
 import { UserProvider } from "./UserContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -23,6 +24,8 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/games" element={<Games />} />
             <Route path="/games/:id" element={<GameDetails />} />
+            <Route path="/latest" element={<Latest />} />
+
           </Routes>
         </UserProvider>
       </ThemeProvider>

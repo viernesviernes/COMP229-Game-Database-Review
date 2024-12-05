@@ -9,8 +9,11 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-        <img src="GameSphere.png" alt="GameSphere Logo" className={styles.logoImage} />
-        <Link to="/home">Game Database</Link>
+        
+      <div className="logo">
+  <Link to="/home">GameSphere</Link>
+</div>
+
       </div>
       <div className={styles.navLinks}>
         <Link to="/games">Games</Link>

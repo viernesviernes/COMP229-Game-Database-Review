@@ -1,111 +1,149 @@
+/* General navbar styles */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #e5e5e5;
-    padding: 10px 20px;
-    font-family: Arial, sans-serif;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 15px 30px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-  .useractions {
-    display: flex;
-    gap: 10px;
-  }
+/* Logo styles */
+.logo {
+  display: flex;
+  align-items: center;
+}
 
-  .useractions button {
-    border: none;
-    background: none;
-  }
-  
-  .logo a {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .navLinks {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  
-  .navLinks a {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-  }
-  
-  .navLinks a:hover {
-    text-decoration: underline;
-  }
-  .logo img {
-    width: 30px; /* Adjust size */
-    height: auto;
-    margin-right: 10px; /* Space between logo and text */
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-  }
-  
-  .dropdownContent {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-    border-radius: 4px;
-    z-index: 1;
-  }
-  
-  .dropdownContent a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 5px 20px;
-  }
-  
-  .dropdownContent a:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .dropdown:hover .dropdownContent {
-    display: block;
-  }
-  
-  .authButtons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .loginButton,
-  .signupButton {
-    padding: 8px 12px;
-    font-size: 14px;
-    font-weight: bold;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .loginButton:hover,
-  .signupButton:hover {
-    background-color: #d4d4d4;
-  }
-  
-  .signupButton {
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
-  
-  .signupButton:hover {
-    background-color: #0056b3;
-  }
-  
+
+.logo a {
+  font-family: 'Press Start 2P', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #bb86fc; /* Matches your dark theme accent */
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.logo a:hover {
+  color: #ffffff; /* Add hover effect for more interactivity */
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.logo img {
+  width: 35px;
+  height: auto;
+  margin-right: 10px;
+}
+
+/* Navigation links */
+.navLinks {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.navLinks a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #e0e0e0;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: #bb86fc;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  color: #e0e0e0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #2a2a2a;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  padding: 10px 0;
+  border-radius: 6px;
+  z-index: 1;
+  min-width: 160px;
+}
+
+.dropdownContent a {
+  text-decoration: none;
+  color: #e0e0e0;
+  display: block;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdownContent a:hover {
+  background-color: #6200ea;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+/* User actions (buttons) */
+.authButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.loginButton,
+.signupButton {
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton {
+  background-color: #333;
+}
+
+.loginButton:hover {
+  background-color: #444;
+}
+
+.signupButton {
+  background-color: #6200ea;
+}
+
+.signupButton:hover {
+  background-color: #3700b3;
+}
+
+/* User profile icon (optional) */
+.useractions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.useractions button {
+  border: none;
+  background: none;
+  color: #e0e0e0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.useractions button:hover {
+  color: #bb86fc;
+}

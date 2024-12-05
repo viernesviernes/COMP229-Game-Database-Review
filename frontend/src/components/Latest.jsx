@@ -1,48 +1,41 @@
+// LatestGames.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./games.module.css"; // Add CSS to match the wireframe
 import Navbar from './Navbar'; // Import Navbar
 
-const Games = () => {
+const Latest = () => {
   const [games, setGames] = useState([]);
-  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  const fetchGames = async () => {
+  // Fetch latest games
+  const fetchLatestGames = async () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.rawg.io/api/games?key=5b98ed2b9ead46e3a6c09e45ae262fc3&page=${page}&page_size=12&search=${query}` // Updated to 12 games per page
+        `https://api.rawg.io/api/games?key=5b98ed2b9ead46e3a6c09e45ae262fc3&page=${page}&page_size=12&ordering=-released` // Sort by latest release
       );
       const data = await response.json();
       setGames(data.results);
       setTotalPages(Math.ceil(data.count / 12)); // Update totalPages based on 12 games per page
     } catch (error) {
-      console.error("Error fetching games:", error);
+      console.error("Error fetching latest games:", error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchGames();
-  }, [query, page]);
+    fetchLatestGames();
+  }, [page]);
 
   return (
     <>
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="Game Name"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button onClick={fetchGames}>Search</button>
-        </div>
+        <h1>Latest Games</h1>
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -88,4 +81,4 @@ const Games = () => {
   );
 };
 
-export default Games;
+export default Latest;
