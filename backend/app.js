@@ -127,25 +127,29 @@ app.get("/api/profile/:username", async (req, res) => {
 
 // Add id to favorites:
 app.post("/api/favorites/:username", async (req, res) => {
-  const { username } = req.params;
-  const { id } = req.body;
+  try {
+    const { username } = req.params;
+    const { id } = req.body;
 
-  let [ json ] = await gamesCollection.find({ username: username }).toArray();
-  
-  let send;
+    let [ json ] = await gamesCollection.find({ username: username }).toArray();
+    
+    let send;
 
-  console.log(json.favorites);
+    let favorites = json.favorites ? json.favorites : []
 
-  if (!json.favorites.includes(id)) {
-    send = await gamesCollection.updateOne(
-      { username: username },
-      { $push: {favorites: id }}
-    );
-  } else {
-    send = {error: `${id} already exists in the profile.`}
+    if (!favorites.includes(id)) {
+      send = await gamesCollection.updateOne(
+        { username: username },
+        { $push: {favorites: id }}
+      );
+    } else {
+      send = {error: `${id} already exists in the profile.`}
+    }
+    
+    res.send(send);
+  } catch {
+    res.send({error: "Couldn't POST data"})
   }
-  
-  res.send(send);
 });
 
 // // // API REQUESTS
