@@ -1,55 +1,40 @@
-import React, { useState, useContext } from "react";
-import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import { ThemeContext } from "../ColorTheme";
-import { UserContext } from "../UserContext";
-import { GoogleLogin } from "@react-oauth/google";
-import styles from "./login.module.css";
+import React, { useState, useContext } from 'react';
+import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { ThemeContext } from '../ColorTheme';
+import { UserContext } from '../UserContext';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import styles from './login.module.css';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login, setUser } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await login(username, password);
     if (result.success) {
-      navigate("/home");
+      navigate('/home');
     } else {
       setError(result.error);
     }
   };
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
-    try {
-      console.log("Google Login Successful:", credentialResponse);
-      // Validate the structure of `credentialResponse` before accessing properties
-      if (credentialResponse.credential) {
-        const userData = {
-          username: credentialResponse.profileObj ? credentialResponse.profileObj.name : "User",
-          email: credentialResponse.profileObj ? credentialResponse.profileObj.email : ""
-        };
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-        navigate("/home");
-      } else {
-        throw new Error("Invalid credential response");
-      }
-    } catch (error) {
-      console.error("Error handling Google login:", error);
-      setError("Google Login failed. Please try again.");
-    }
+    console.log('Google Login Successful:', credentialResponse);
+    // Send credentialResponse.credential to your backend for validation
+    navigate('/home');
   };
 
   const handleGoogleLoginError = () => {
-    console.error("Google Login Failed");
-    setError("Google Login failed. Please try again.");
+    console.error('Google Login Failed');
+    setError('Google Login failed. Please try again.');
   };
 
   return (
@@ -73,7 +58,7 @@ const Login = () => {
             <div className={styles.inputGroup}>
               <FaLock className={styles.icon} />
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -97,7 +82,6 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={handleGoogleLoginError}
-            useOneTap
             render={(renderProps) => (
               <button
                 className={styles.googleButton}
@@ -110,8 +94,8 @@ const Login = () => {
             )}
           />
           <p className={styles.signupPrompt}>
-            Don't have an account?{" "}
-            <span onClick={() => navigate("/signup")}>Sign up</span>
+            Don't have an account?{' '}
+            <span onClick={() => navigate('/signup')}>Sign up</span>
           </p>
         </div>
       </div>
