@@ -90,7 +90,6 @@ app.post("/google-login", async (req, res) => {
   try {
     const { token } = req.body;
 
-    // Verify the token with Google
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
       audience: "159976334384-t5n83o9qjbscgugor7kpo5j65sjldrh5.apps.googleusercontent.com",
@@ -98,9 +97,7 @@ app.post("/google-login", async (req, res) => {
 
     const { email, name } = ticket.getPayload();
 
-    // Check if user exists, if not, create a new user
     let user = await gamesCollection.findOne({ email });
-
     if (!user) {
       user = {
         username: name,
