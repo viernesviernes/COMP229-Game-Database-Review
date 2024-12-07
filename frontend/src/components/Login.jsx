@@ -29,7 +29,7 @@ const Login = () => {
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log("Google Login Successful:", credentialResponse);
     // Send credentialResponse.credential to your backend for validation
-    const userData = { username: credentialResponse.profileObj.name };
+    const userData = { username: credentialResponse.clientId};
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
     navigate("/home");
