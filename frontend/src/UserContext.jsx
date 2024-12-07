@@ -5,19 +5,22 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  // Check for user session in localStorage on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
 
+    // Event listener for when the user closes the tab or window
     const handleBeforeUnload = () => {
-      // Remove user session for additional security if needed
-      localStorage.removeItem('user');
+      // Optional: Call logout or perform clean-up if needed
+      localStorage.removeItem('user'); // Removes the user from localStorage to ensure no auto-login on reload
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
 
+    // Cleanup event listener when component unmounts
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
@@ -32,7 +35,7 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        const userData = { username, token: data.token };
+        const userData = { username };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         return { success: true };
@@ -53,7 +56,7 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        const userData = { username, token: data.token };
+        const userData = { username };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         return { success: true };
