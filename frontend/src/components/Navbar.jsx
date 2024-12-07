@@ -9,11 +9,9 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-        
-      <div className="logo">
-  <Link to="/home">GameSphere</Link>
-</div>
-
+        <div className="logo">
+          <Link to="/home">GameSphere</Link>
+        </div>
       </div>
       <div className={styles.navLinks}>
         <Link to="/games">Games</Link>
@@ -26,11 +24,7 @@ const Navbar = () => {
           </div>
         </div>
         <Link to="/latest">Latest</Link>
-        <Link to="/newest">Newest Additions</Link>
       </div>
-      
-
-
       <div className={styles.authButtons}>
         {!user ? (
           <>
