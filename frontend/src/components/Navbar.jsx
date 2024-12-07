@@ -21,7 +21,9 @@ const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.logo}>
         <div className="logo">
-          <Link to="/home">GameSphere</Link>
+          <Link to="/home" onClick={!user ? handleDisabledClick : null}>
+            GameSphere
+          </Link>
         </div>
       </div>
       <div className={styles.navLinks}>
