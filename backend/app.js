@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const cors = require("cors");
 const axios = require('axios');
+
 const { OAuth2Client } = require('google-auth-library');
 
 const app = express();
@@ -123,7 +124,7 @@ app.get("/api/profile/:username", async (req, res) => {
   const { username } = req.params;
   let json = await gamesCollection.find({ username: username }).toArray();
   res.status(200).json(json);
-})
+});
 
 // Add id to favorites:
 app.post("/api/favorites/:username", async (req, res) => {

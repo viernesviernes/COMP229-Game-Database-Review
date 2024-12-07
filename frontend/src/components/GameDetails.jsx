@@ -14,11 +14,24 @@ const GameDetails = () => {
   const fetchGameDetails = async () => {
     setLoading(true);
     try {
+
+      // Fetch game data
       const response = await fetch(
         `https://api.rawg.io/api/games/${id}?key=5b98ed2b9ead46e3a6c09e45ae262fc3`
       );
       const data = await response.json();
       setGameDetails(data);
+
+      // Determine if user has it as a favorite
+      const fetchedFavs = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/profile/mjviernes`)
+      .then(response => {
+        return response.json();
+      }).then(dict => {
+        return dict[0].favorites;
+      });
+
+      setIsFavorite(fetchedFavs.includes(parseInt(id)));
+
     } catch (error) {
       console.error("Error fetching game details:", error);
     } finally {
