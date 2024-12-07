@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import styles from './login.module.css';
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login, googleLogin } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,16 +26,14 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = async (credentialResponse) => {
-    const result = await googleLogin(credentialResponse.credential);
-    if (result.success) {
-      navigate('/home');
-    } else {
-      setError(result.error);
-    }
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    console.log('Google Login Successful:', credentialResponse);
+    // Send credentialResponse.credential to your backend for validation
+    navigate('/home');
   };
 
   const handleGoogleLoginError = () => {
+    console.error('Google Login Failed');
     setError('Google Login failed. Please try again.');
   };
 
