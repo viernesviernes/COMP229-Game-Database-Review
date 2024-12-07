@@ -18,7 +18,7 @@ body {
   margin-top: 50px;
   padding: 40px;
   width: 90%;
-  background-image:url('dark.jpg');
+  background-image: url('dark.jpg');
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
@@ -36,19 +36,61 @@ body {
   color: #ddd;
 }
 
-.search-bar {
-  width: 100%;
-  padding: 12px;
+/* Search bar container */
+.searchBar {
+  display: flex;
+  justify-content: center; /* Centers the input and button horizontally */
+  align-items: center; /* Aligns input and button vertically */
+  margin-bottom: 20px;
+  width: 100%; /* Ensures the container spans full width */
+  max-width: 500px; /* Limits the maximum width of the search bar */
+  margin-left: auto; /* Centers the search bar horizontally within its parent */
+  margin-right: auto;
+}
+
+/* Input field styling */
+.searchBar input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 25px 0 0 25px; /* Rounded left corner */
+  width: 100%; /* Makes input take up all available space */
+  max-width: 400px; /* Maximum width for input */
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* Placeholder text */
+.searchBar input::placeholder {
+  color: #777;
+}
+
+/* Focus styling for input */
+.searchBar input:focus {
+  outline: none;
+  border: 1px solid #6200ea;
+}
+
+/* Button styling */
+.searchBar button {
+  padding: 10px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
-  background-color: #333;
-  color: #fff;
+  border-radius: 0 25px 25px 0; /* Rounded right corner */
+  background-color: #6200ea;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.searchBar button:hover {
+  background-color: #3700b3;
 }
 
 /* Circular Slider */
 .circular-slider {
-  padding-top:30px; 
+  padding-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,14 +143,16 @@ body {
   border-radius: 5px;
   color: #fff;
 }
-.search-result-item{
+
+.search-result-item {
   color: #fff;
   font-size: 18px;
 }
-.search-result-item h3{
+
+.search-result-item h3 {
   background: rgba(0, 0, 0, 0.6);
 }
 
-.search-result-item:hover{
+.search-result-item:hover {
   color: #dbc0f5;
 }
