@@ -26,16 +26,11 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = async (credentialResponse) => {
+  const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log('Google Login Successful:', credentialResponse);
-    const token = credentialResponse.credential;
-    const result = await googleLogin(token);
-    if (result.success) {
-      navigate('/home');
-    } else {
-      setError(result.error);
-    }
-  };  
+    // Send credentialResponse.credential to your backend for validation
+    navigate('/home');
+  };
 
   const handleGoogleLoginError = () => {
     console.error('Google Login Failed');
