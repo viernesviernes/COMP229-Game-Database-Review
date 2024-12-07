@@ -18,7 +18,6 @@
   align-items: center;
 }
 
-
 .logo a {
   font-family: 'Press Start 2P', sans-serif;
   font-weight: bold;
@@ -99,8 +98,11 @@
   gap: 15px;
 }
 
+/* General button styles */
 .loginButton,
-.signupButton {
+.signupButton,
+.profileButton,
+.logoutButton {
   padding: 8px 14px;
   font-size: 14px;
   font-weight: bold;
@@ -112,6 +114,7 @@
   transition: background-color 0.3s ease;
 }
 
+/* Login button */
 .loginButton {
   background-color: #333;
 }
@@ -120,12 +123,31 @@
   background-color: #444;
 }
 
+/* Signup button */
 .signupButton {
   background-color: #6200ea;
 }
 
 .signupButton:hover {
   background-color: #3700b3;
+}
+
+/* Profile button */
+.profileButton {
+  background-color: #333; /* Matches login button background */
+}
+
+.profileButton:hover {
+  background-color: #444; /* Matches hover effect of login */
+}
+
+/* Logout button */
+.logoutButton {
+  background-color: #6200ea; /* Matches signup button background */
+}
+
+.logoutButton:hover {
+  background-color: #3700b3; /* Matches hover effect of signup */
 }
 
 /* User profile icon (optional) */
