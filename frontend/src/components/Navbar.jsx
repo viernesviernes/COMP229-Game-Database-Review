@@ -29,7 +29,7 @@ const Navbar = () => {
         <Link to="/newest">Newest Additions</Link>
       </div>
       
-      {/* ADD CONDITIONALS HERE */}
+
 
       <div className={styles.authButtons}>
         {!user ? (
