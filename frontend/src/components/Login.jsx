@@ -6,8 +6,6 @@ import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import styles from './login.module.css';
-import jwtDecode from 'jwt-decode';
-
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -16,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { setUser, login } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,29 +28,8 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log('Google Login Successful:', credentialResponse);
-    console.log("Code is updated")
-  
-    // Decode the ID token to access user information
-    try {
-      const decodedToken = jwtDecode(credentialResponse.credential);
-      console.log('Decoded Token:', decodedToken);
-  
-      // Extract user data from the decoded token
-      const userData = {
-        username: decodedToken.email, // Adjust based on your needs
-        name: decodedToken.name, // Example to get the user's name
-      };
-  
-      // Update UserContext and local storage
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-  
-      // Navigate to home page after login
-      navigate('/home');
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      setError('Failed to decode token. Please try again.');
-    }
+    // Send credentialResponse.credential to your backend for validation
+    navigate('/home');
   };
 
   const handleGoogleLoginError = () => {
