@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./HomePage.css";
 
@@ -108,7 +108,7 @@ const HomePage = () => {
                 return (
                   <Link
                     key={game.id}
-                    to={`/games/${game.id}`} 
+                    to={`/games/${game.id}`}
                     className={className}
                     style={{
                       backgroundImage: `url(${game.background_image})`,
@@ -130,16 +130,12 @@ const HomePage = () => {
               {searchResults.map((game) => (
                 <Link
                   key={game.id}
-                  to={`/games/${game.id}`} // Add link to the game details page
+                  to={`/games/${game.id}`}
                   className="search-result-item"
                   style={{
                     backgroundImage: `url(${game.background_image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                   }}
                 >
                   <h3 className="game-title">{game.name}</h3>
