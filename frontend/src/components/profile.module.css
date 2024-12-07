@@ -1,5 +1,5 @@
 .container {
-    background-color: #f5f5f5;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
 
     /* Head profile container */
     .head {
-        background-color: #e5e5e5;
+        background-color: #1e1e1e;
         padding: 10px;
         width: 50%;
         margin-bottom: 3em;
@@ -21,7 +21,7 @@
 
   /* Tab profile container */
     .tabs {
-        background-color: #e5e5e5;
+        background-color: #1e1e1e;
         padding: 1em;
         width: 100%;
     }
@@ -31,7 +31,7 @@
         justify-content: center;
         list-style-type: none;
         margin: 0;
-        padding: 0;
+        padding: 1em;
     }
 
     .tabs li {
@@ -50,20 +50,21 @@
         }
     
     .active button {
-        font-weight: bold;
+      color: #999;
+      font-weight: bold;
     }
 
     .active {
-        border-bottom: 2px solid #a39696;
+        border-bottom: 2px solid #999;
     }
 
     .inactive button {
         font-weight: lighter;
-        color: #9b9090;
+        color: #ffffff;
     }
 
     .inactive {
-        border-bottom: 2px solid #ccc;
+        border-bottom: 2px solid #ffffff;
     }
   
   /* Style for game cards */
@@ -76,10 +77,10 @@
   
   /* Each individual game card */
   .gameCard {
-    background-color: white;
-    border-radius: 8px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -101,28 +102,38 @@
   /* Game name and text inside the card */
   .gameCard h3 {
     font-size: 18px;
-    color: #333;
-    margin: 10px;
+    color: #d1c4e9; /* Light lavender for a softer look */
+    margin: 15px 10px;
     text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Subtle shadow */
   }
-  
+  .gameLink {
+    font-size: 18px;
+    color: #ffffff; /* Soft gold for better readability */
+    margin: 15px 10px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
   .gameCard p {
     font-size: 14px;
-    color: #777;
+    color: #999;
     margin: 5px 10px;
+    text-align: center;
   }
-  
+
   /* Read more link */
   .readMore {
     display: block;
     text-align: center;
-    color: #007bff;
+    color: #bb86fc;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 10px 0 15px;
   }
-  
+
   .readMore:hover {
     text-decoration: underline;
+    color: #6200ea;
   }
   
   /* Pagination container */
