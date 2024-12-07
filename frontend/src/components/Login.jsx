@@ -6,6 +6,8 @@ import { ThemeContext } from '../ColorTheme';
 import { UserContext } from '../UserContext';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import styles from './login.module.css';
+import jwtDecode from 'jwt-decode';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -28,18 +30,28 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log('Google Login Successful:', credentialResponse);
-
-    // Extract user data from credentialResponse (adjust fields as needed)
-    const userData = {
-      username: credentialResponse.profileObj.email, // Example, adjust according to your response structure
-    };
-
-    // Update UserContext and local storage
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
-
-    // Navigate to home page after login
-    navigate('/home');
+  
+    // Decode the ID token to access user information
+    try {
+      const decodedToken = jwtDecode(credentialResponse.credential);
+      console.log('Decoded Token:', decodedToken);
+  
+      // Extract user data from the decoded token
+      const userData = {
+        username: decodedToken.email, // Adjust based on your needs
+        name: decodedToken.name, // Example to get the user's name
+      };
+  
+      // Update UserContext and local storage
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+  
+      // Navigate to home page after login
+      navigate('/home');
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      setError('Failed to decode token. Please try again.');
+    }
   };
 
   const handleGoogleLoginError = () => {
