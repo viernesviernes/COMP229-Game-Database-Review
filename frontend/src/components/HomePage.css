@@ -101,14 +101,3 @@ body {
   border-radius: 5px;
   color: #fff;
 }
-.search-result-item{
-  color: #fff;
-  font-size: 18px;
-}
-.search-result-item h3{
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.search-result-item:hover{
-  color: #dbc0f5;
-}

@@ -108,7 +108,7 @@ const HomePage = () => {
                 return (
                   <Link
                     key={game.id}
-                    to={`/games/${game.id}`} 
+                    to={`/games/${game.id}`} // Add link to the game details page
                     className={className}
                     style={{
                       backgroundImage: `url(${game.background_image})`,
