@@ -30,6 +30,7 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log('Google Login Successful:', credentialResponse);
+    console.log("Code is updated")
   
     // Decode the ID token to access user information
     try {
