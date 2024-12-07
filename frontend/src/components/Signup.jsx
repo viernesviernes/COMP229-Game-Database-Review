@@ -16,7 +16,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { signup } = useContext(UserContext);
+  const { signup, googleLogin } = useContext(UserContext);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -32,14 +32,22 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSignupSuccess = (credentialResponse) => {
-    console.log("Google Signup Successful:", credentialResponse);
-    // Send credentialResponse.credential to your backend for user creation or validation
-    navigate("/home");
+  const handleGoogleSignupSuccess = async (credentialResponse) => {
+    try {
+      const googleToken = credentialResponse.credential;
+      const result = await googleLogin(googleToken);
+      if (result.success) {
+        navigate("/home");
+      } else {
+        setError(result.error);
+      }
+    } catch (error) {
+      console.error("Google Signup Failed:", error);
+      setError("Google Signup failed. Please try again.");
+    }
   };
 
   const handleGoogleSignupError = () => {
-    console.error("Google Signup Failed");
     setError("Google Signup failed. Please try again.");
   };
 
