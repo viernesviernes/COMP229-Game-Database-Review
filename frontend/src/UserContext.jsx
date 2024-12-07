@@ -5,22 +5,19 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Check for user session in localStorage on component mount
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
 
-    // Event listener for when the user closes the tab or window
     const handleBeforeUnload = () => {
-      // Optional: Call logout or perform clean-up if needed
-      localStorage.removeItem('user'); // Removes the user from localStorage to ensure no auto-login on reload
+      // Remove user session for additional security if needed
+      localStorage.removeItem('user');
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Cleanup event listener when component unmounts
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
@@ -35,7 +32,7 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        const userData = { username };
+        const userData = { username, token: data.token };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         return { success: true };
@@ -56,7 +53,7 @@ export const UserProvider = ({ children }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        const userData = { username };
+        const userData = { username, token: data.token };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         return { success: true };
@@ -68,13 +65,38 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const googleLogin = async (token) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/google-login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const userData = {
+          username: data.user.username,
+          email: data.user.email,
+          token: data.token,
+        };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        return { success: true };
+      } else {
+        return { success: false, error: data.error };
+      }
+    } catch (error) {
+      return { success: false, error: 'An error occurred during Google login. Please try again.' };
+    }
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
   return (
-    <UserContext.Provider value={{ user, login, signup, logout }}>
+    <UserContext.Provider value={{ user, login, signup, googleLogin, logout }}>
       {children}
     </UserContext.Provider>
   );
