@@ -39,7 +39,7 @@ const Navbar = () => {
             <Link to="/genre/adventure" onClick={!user ? handleDisabledClick : null}>
               Adventure
             </Link>
-            <Link to="/genre/rpg" onClick={!user ? handleDisabledClick : null}>
+            <Link to="/genre/role-playing-games-rpg" onClick={!user ? handleDisabledClick : null}>
               RPG
             </Link>
           </div>
