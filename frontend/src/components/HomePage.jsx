@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./HomePage.css";
 
@@ -75,79 +75,58 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div className="home-container">
-        <main className="main-content">
-          <div className="welcome-message">
-            <h1>The GameSphere</h1>
-            <p>
-              Explore our comprehensive game database. Search by title, genre,
-              or platform to find the information you need.
-            </p>
+      <div className="container">
+        <div className="welcome-message">
+          <h1>The GameSphere</h1>
+          <p>
+            Explore our comprehensive game database. Search by title, genre,
+            or platform to find the information you need.
+          </p>
+          <div className="searchBar">
             <input
               type="text"
-              className="search-bar"
               placeholder="Enter a game name"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
+        </div>
 
-          {searchResults.length === 0 ? (
-            <div className="circular-slider">
-              {sliderGames.map((game, index) => {
-                const position =
-                  (index - currentSlide + sliderGames.length) %
-                  sliderGames.length;
-
-                let className = "slider-item";
-                if (position === 0) className += " center";
-                else if (position === 1) className += " right";
-                else if (position === sliderGames.length - 1)
-                  className += " left";
-
-                return (
-                  <Link
-                    key={game.id}
-                    to={`/games/${game.id}`} 
-                    className={className}
-                    style={{
-                      backgroundImage: `url(${game.background_image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {position === 0 && <h3 className="game-title">{game.name}</h3>}
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="search-results">
-              {searchResults.map((game) => (
-                <Link
-                  key={game.id}
-                  to={`/games/${game.id}`} // Add link to the game details page
-                  className="search-result-item"
-                  style={{
-                    backgroundImage: `url(${game.background_image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h3 className="game-title">{game.name}</h3>
-                </Link>
-              ))}
-            </div>
-          )}
-        </main>
+        {searchResults.length === 0 ? (
+          <div className="gamesList">
+            {sliderGames.map((game) => (
+              <Link
+                key={game.id}
+                to={`/games/${game.id}`}
+                className="gameCard"
+                style={{
+                  backgroundImage: `url(${game.background_image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <h3 className="gameTitle">{game.name}</h3>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="gamesList">
+            {searchResults.map((game) => (
+              <Link
+                key={game.id}
+                to={`/games/${game.id}`}
+                className="gameCard"
+                style={{
+                  backgroundImage: `url(${game.background_image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <h3 className="gameTitle">{game.name}</h3>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

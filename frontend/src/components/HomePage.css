@@ -3,27 +3,23 @@ body {
   margin: 0;
   font-family: "Arial", sans-serif;
   background-color: #121212;
-  color: #fff;
+  color: #e0e0e0;
 }
 
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 0;
+/* General container for the entire page */
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #121212;
 }
 
-.main-content {
+/* Welcome message */
+.welcome-message {
   text-align: center;
-  margin-top: 50px;
-  padding: 40px;
-  width: 90%;
-  background-image:url('dark.jpg');
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px;
 }
 
-/* Welcome Message */
 .welcome-message h1 {
   font-size: 36px;
   margin-bottom: 10px;
@@ -31,84 +27,73 @@ body {
 }
 
 .welcome-message p {
-  margin-bottom: 20px;
   font-size: 18px;
   color: #ddd;
+  margin-bottom: 20px;
 }
 
-.search-bar {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #333;
-  color: #fff;
-}
-
-/* Circular Slider */
-.circular-slider {
-  padding-top:30px; 
+/* Search bar */
+.searchBar {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  height: 300px;
   width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+}
+
+.searchBar input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 25px 0 0 25px;
+  width: 100%;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.searchBar input::placeholder {
+  color: #777;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border: 1px solid #6200ea;
+}
+
+/* Game card styling */
+.gamesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.gameCard {
+  background-color: #1e1e1e;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.slider-item {
-  position: absolute;
-  width: 200px;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  opacity: 0;
-  transform: scale(0.8);
+.gameCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
 }
 
-.slider-item.center {
-  transform: scale(1);
-  z-index: 2;
-  opacity: 1;
-  left: 50%;
-  transform: translateX(-50%) scale(1);
-}
-
-.slider-item.right {
-  transform: translateX(200%) scale(0.8);
-  z-index: 1;
-  opacity: 0.5;
-}
-
-.slider-item.left {
-  transform: translateX(-200%) scale(0.8);
-  z-index: 1;
-  opacity: 0.5;
-}
-
-/* Centered Item Text */
-.slider-item h3 {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+.gameTitle {
   font-size: 18px;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-}
-.search-result-item{
-  color: #fff;
-  font-size: 18px;
-}
-.search-result-item h3{
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.search-result-item:hover{
-  color: #dbc0f5;
+  color: #d1c4e9; /* Light lavender */
+  margin: 15px 10px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
