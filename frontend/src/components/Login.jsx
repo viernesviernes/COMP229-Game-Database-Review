@@ -1,49 +1,62 @@
-import React, { useState, useContext } from "react";
-import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
-import { ThemeContext } from "../ColorTheme";
-import { UserContext } from "../UserContext";
-import { GoogleLogin } from "@react-oauth/google";
-import styles from "./login.module.css";
+import React, { useState, useContext } from 'react';
+import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { ThemeContext } from '../ColorTheme';
+import { UserContext } from '../UserContext';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import styles from './login.module.css';
+import jwtDecode from 'jwt-decode';
+
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login, setUser } = useContext(UserContext);
+  const { setUser, login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await login(username, password);
     if (result.success) {
-      navigate("/home");
+      navigate('/home');
     } else {
       setError(result.error);
     }
   };
 
-  const handleGoogleLoginSuccess = (response) => {
-    console.log("Google Login Successful:", response);
-    if (response.credential) {
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    console.log('Google Login Successful:', credentialResponse);
+  
+    // Decode the ID token to access user information
+    try {
+      const decodedToken = jwtDecode(credentialResponse.credential);
+      console.log('Decoded Token:', decodedToken);
+  
+      // Extract user data from the decoded token
       const userData = {
-        username: response.profileObj ? response.profileObj.name : "User",
-        email: response.profileObj ? response.profileObj.email : ""
+        username: decodedToken.email, // Adjust based on your needs
+        name: decodedToken.name, // Example to get the user's name
       };
+  
+      // Update UserContext and local storage
       setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-      navigate("/home");
-    } else {
-      setError("Failed to retrieve user information.");
+      localStorage.setItem('user', JSON.stringify(userData));
+  
+      // Navigate to home page after login
+      navigate('/home');
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      setError('Failed to decode token. Please try again.');
     }
   };
 
   const handleGoogleLoginError = () => {
-    console.error("Google Login Failed");
-    setError("Google Login failed. Please try again.");
+    console.error('Google Login Failed');
+    setError('Google Login failed. Please try again.');
   };
 
   return (
@@ -67,7 +80,7 @@ const Login = () => {
             <div className={styles.inputGroup}>
               <FaLock className={styles.icon} />
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -91,7 +104,6 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={handleGoogleLoginError}
-            useOneTap
             render={(renderProps) => (
               <button
                 className={styles.googleButton}
@@ -104,8 +116,8 @@ const Login = () => {
             )}
           />
           <p className={styles.signupPrompt}>
-            Don't have an account?{" "}
-            <span onClick={() => navigate("/signup")}>Sign up</span>
+            Don't have an account?{' '}
+            <span onClick={() => navigate('/signup')}>Sign up</span>
           </p>
         </div>
       </div>
