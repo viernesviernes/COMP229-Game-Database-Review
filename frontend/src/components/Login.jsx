@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { ThemeContext } from "../ColorTheme";
 import { UserContext } from "../UserContext";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import styles from "./login.module.css";
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login } = useContext(UserContext);
+  const { login, setUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,13 +26,19 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
-    console.log("Google Login Successful:", credentialResponse);
-    // Send credentialResponse.credential to your backend for validation
-    const userData = { username: credentialResponse.clientId};
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-    navigate("/home");
+  const handleGoogleLoginSuccess = (response) => {
+    console.log("Google Login Successful:", response);
+    if (response.credential) {
+      const userData = {
+        username: response.profileObj ? response.profileObj.name : "User",
+        email: response.profileObj ? response.profileObj.email : ""
+      };
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+      navigate("/home");
+    } else {
+      setError("Failed to retrieve user information.");
+    }
   };
 
   const handleGoogleLoginError = () => {
@@ -85,6 +91,7 @@ const Login = () => {
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
             onError={handleGoogleLoginError}
+            useOneTap
             render={(renderProps) => (
               <button
                 className={styles.googleButton}
