@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./games.module.css"; // Add CSS to match the wireframe
 import Navbar from './Navbar'; // Import Navbar
+import emptyGameImage from './emptygame.jpg';
 
 const Games = () => {
   const [games, setGames] = useState([]);
@@ -50,7 +51,7 @@ const Games = () => {
             {games.map((game) => (
               <div key={game.id} className={styles.gameCard}>
                 <img
-                  src={game.background_image}
+                  src={game.background_image || emptyGameImage}
                   alt={game.name}
                   className={styles.gameImage}
                 />
