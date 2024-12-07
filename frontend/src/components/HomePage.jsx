@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import Navbar from "./Navbar";
 import "./HomePage.css";
 
@@ -92,7 +92,7 @@ const HomePage = () => {
             />
           </div>
 
-          {searchResults.length === 0 ? (
+          {searchQuery.trim() === "" || searchResults.length === 0 ? (
             <div className="circular-slider">
               {sliderGames.map((game, index) => {
                 const position =
@@ -136,6 +136,10 @@ const HomePage = () => {
                     backgroundImage: `url(${game.background_image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
                   <h3 className="game-title">{game.name}</h3>
