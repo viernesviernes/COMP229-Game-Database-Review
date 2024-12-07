@@ -60,62 +60,57 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-// Login route
+// Login route (traditional + Google login combined)
 app.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, token } = req.body;
 
-    // Find the user in the database
-    const user = await gamesCollection.findOne({ username });
-    if (!user) {
-      return res.status(400).json({ error: "Invalid username or password" });
+    if (token) {
+      // Google login flow
+      const ticket = await googleClient.verifyIdToken({
+        idToken: token,
+        audience: "159976334384-t5n83o9qjbscgugor7kpo5j65sjldrh5.apps.googleusercontent.com",
+      });
+
+      const payload = ticket.getPayload();
+      console.log(payload); // Optional: Debug to ensure you receive the payload
+      const { email, name } = payload;
+
+      // Check if user exists, if not, create a new user
+      let user = await gamesCollection.findOne({ email });
+      if (!user) {
+        user = {
+          username: name,
+          email: email,
+          favorites: [],
+        };
+        await gamesCollection.insertOne(user);
+      }
+
+      return res.status(200).json({ message: "Google login successful", user });
+    } else if (username && password) {
+      // Traditional login flow
+      const user = await gamesCollection.findOne({ username });
+      if (!user) {
+        return res.status(400).json({ error: "Invalid username or password" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: "Invalid username or password" });
+      }
+
+      return res.status(200).json({ message: "Logged in successfully", username });
+    } else {
+      // Invalid request
+      return res.status(400).json({ error: "Invalid login request" });
     }
-
-    // Compare the hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ error: "Invalid username or password" });
-    }
-
-    res.json({ message: "Logged in successfully", username });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Error logging in" });
   }
 });
 
-// Google login route
-app.post("/google-login", async (req, res) => {
-  try {
-    const { token } = req.body;
-
-    // Verify the token with Google
-    const ticket = await googleClient.verifyIdToken({
-      idToken: token,
-      audience: "159976334384-t5n83o9qjbscgugor7kpo5j65sjldrh5.apps.googleusercontent.com",
-    });
-    const payload = ticket.getPayload();
-    console.log(payload);
-    const { email, name } = payload;
-
-    // Check if user exists, if not, create a new user
-    let user = await gamesCollection.findOne({ email });
-
-    if (!user) {
-      user = {
-        username: name,
-        email: email,
-        favorites: [],
-      };
-      await gamesCollection.insertOne(user);
-    }
-
-    res.status(200).json({ message: "Google login successful", user });
-  } catch (error) {
-    console.error("Error during Google login:", error);
-    res.status(500).json({ error: "Error during Google login" });
-  }
-});
 
 // // // BACKEND REQUESTS
 

@@ -14,7 +14,6 @@ export const UserProvider = ({ children }) => {
 
     // Event listener for when the user closes the tab or window
     const handleBeforeUnload = () => {
-      // Optional: Call logout or perform clean-up if needed
       localStorage.removeItem('user'); // Removes the user from localStorage to ensure no auto-login on reload
     };
 
@@ -68,13 +67,34 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const googleLogin = async (googleToken) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: googleToken }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const userData = data.user;
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        return { success: true };
+      } else {
+        return { success: false, error: data.error };
+      }
+    } catch (error) {
+      return { success: false, error: 'An error occurred during Google login. Please try again.' };
+    }
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, login, signup, logout }}>
+    <UserContext.Provider value={{ user, setUser, login, signup, googleLogin, logout }}>
       {children}
     </UserContext.Provider>
   );
