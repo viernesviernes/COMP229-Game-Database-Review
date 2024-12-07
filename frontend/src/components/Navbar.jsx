@@ -12,6 +12,11 @@ const Navbar = () => {
     navigate('/login'); // Redirect to login page after logout
   };
 
+  // Function to prevent navigation if not logged in
+  const handleDisabledClick = (e) => {
+    e.preventDefault(); // Prevent the default link behavior
+  };
+
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -20,16 +25,26 @@ const Navbar = () => {
         </div>
       </div>
       <div className={styles.navLinks}>
-        <Link to="/games">Games</Link>
+        <Link to="/games" onClick={!user ? handleDisabledClick : null}>
+          Games
+        </Link>
         <div className={styles.dropdown}>
           <span>Genre ▼</span>
           <div className={styles.dropdownContent}>
-            <Link to="/genre/action">Action</Link>
-            <Link to="/genre/adventure">Adventure</Link>
-            <Link to="/genre/rpg">RPG</Link>
+            <Link to="/genre/action" onClick={!user ? handleDisabledClick : null}>
+              Action
+            </Link>
+            <Link to="/genre/adventure" onClick={!user ? handleDisabledClick : null}>
+              Adventure
+            </Link>
+            <Link to="/genre/rpg" onClick={!user ? handleDisabledClick : null}>
+              RPG
+            </Link>
           </div>
         </div>
-        <Link to="/latest">Latest</Link>
+        <Link to="/latest" onClick={!user ? handleDisabledClick : null}>
+          Latest
+        </Link>
       </div>
       <div className={styles.authButtons}>
         {!user ? (
