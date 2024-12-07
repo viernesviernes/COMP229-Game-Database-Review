@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
-  const { login } = useContext(UserContext);
+  const { setUser, login } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +28,17 @@ const Login = () => {
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
     console.log('Google Login Successful:', credentialResponse);
-    // Send credentialResponse.credential to your backend for validation
+
+    // Extract user data from credentialResponse (adjust fields as needed)
+    const userData = {
+      username: credentialResponse.profileObj.email, // Example, adjust according to your response structure
+    };
+
+    // Update UserContext and local storage
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+
+    // Navigate to home page after login
     navigate('/home');
   };
 
