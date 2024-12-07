@@ -64,7 +64,7 @@ const Games = () => {
                   Platforms:{" "}
                   {game.platforms?.map((p) => p.platform.name).join(", ")}
                 </p>
-                <p>{game.short_description || "No description available"}</p>
+                <p>{game.short_description || "Click to view description"}</p>
               </div>
             ))}
           </div>
