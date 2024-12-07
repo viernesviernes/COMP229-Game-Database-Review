@@ -83,14 +83,13 @@ const HomePage = () => {
               Explore our comprehensive game database. Search by title, genre,
               or platform to find the information you need.
             </p>
-            <div className="searchBar">
-              <input
-                type="text"
-                placeholder="Enter a game name"
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-              />
-            </div>
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Enter a game name"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
           </div>
 
           {searchResults.length === 0 ? (
@@ -109,7 +108,7 @@ const HomePage = () => {
                 return (
                   <Link
                     key={game.id}
-                    to={`/games/${game.id}`}
+                    to={`/games/${game.id}`} 
                     className={className}
                     style={{
                       backgroundImage: `url(${game.background_image})`,
@@ -127,19 +126,23 @@ const HomePage = () => {
               })}
             </div>
           ) : (
-            <div className="gamesList">
+            <div className="search-results">
               {searchResults.map((game) => (
                 <Link
                   key={game.id}
-                  to={`/games/${game.id}`}
-                  className="gameCard"
+                  to={`/games/${game.id}`} // Add link to the game details page
+                  className="search-result-item"
                   style={{
                     backgroundImage: `url(${game.background_image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  <h3>{game.name}</h3>
+                  <h3 className="game-title">{game.name}</h3>
                 </Link>
               ))}
             </div>
