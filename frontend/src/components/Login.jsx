@@ -26,18 +26,24 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = (response) => {
-    console.log("Google Login Successful:", response);
-    if (response.credential) {
-      const userData = {
-        username: response.profileObj ? response.profileObj.name : "User",
-        email: response.profileObj ? response.profileObj.email : ""
-      };
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-      navigate("/home");
-    } else {
-      setError("Failed to retrieve user information.");
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    try {
+      console.log("Google Login Successful:", credentialResponse);
+      // Validate the structure of `credentialResponse` before accessing properties
+      if (credentialResponse.credential) {
+        const userData = {
+          username: credentialResponse.profileObj ? credentialResponse.profileObj.name : "User",
+          email: credentialResponse.profileObj ? credentialResponse.profileObj.email : ""
+        };
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/home");
+      } else {
+        throw new Error("Invalid credential response");
+      }
+    } catch (error) {
+      console.error("Error handling Google login:", error);
+      setError("Google Login failed. Please try again.");
     }
   };
 
