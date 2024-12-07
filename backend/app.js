@@ -149,8 +149,23 @@ app.post("/api/favorites/:username", async (req, res) => {
     
     res.send(send);
   } catch {
-    res.send({error: "Couldn't POST data"})
+    res.send({error: "Couldn't POST data"});
   }
+});
+
+app.delete("/api/favorites/:username", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const { id } = req.body;
+    console.log("asdfasdf");
+
+    let results = await gamesCollection.updateOne({username : username}, { $pull: { favorites: id } });
+
+    res.status(200).send(results);
+
+  } catch {
+    res.status(500).send({error: "Couldn't DELETE data"});
+  };
 });
 
 // // // API REQUESTS
