@@ -30,6 +30,7 @@ const GameDetails = () => {
         return dict[0].favorites;
       });
 
+      console.log(fetchedFavs.includes(parseInt(id)));
       setIsFavorite(fetchedFavs.includes(parseInt(id)));
 
     } catch (error) {
@@ -58,9 +59,32 @@ const GameDetails = () => {
         }
     }
     catch(error){
-      console.error("Error adding to favorites:", error);
+      console.error("Error adding to favorites: ", error);
     }
-  }
+  };
+
+  const removeToFavourites = async () => {
+    try{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/favorites/${user.username}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: gameDetails.id }),
+        });
+        const result = await response.json();
+  
+        if (response.ok) {
+          setIsFavorite(false);
+          alert("Game removed from favorites!");
+        } else {
+          alert(result.error || "Failed to remove from favorites.");
+        }
+    }
+    catch(error){
+      console.error("Error removing from favorites: ", error);
+    }
+  };
 
   useEffect(() => {
     fetchGameDetails();
@@ -85,7 +109,8 @@ const GameDetails = () => {
         className={styles.gameImage}
       />
       <div className={styles.favourites}> 
-      <button onClick={addToFavourites}  disabled={isFavorite}>{isFavorite ? "Added to Favorites" : "Add to Favorites"}</button>
+      {!isFavorite ? <button onClick={addToFavourites} id="buttonAdd">Add to Favorites</button> : 
+      <button onClick={removeToFavourites} id="buttonRemove">Remove to Favorites</button>}
       </div>
       <div className={styles.details}>
         <p><strong>Release Date:</strong> {gameDetails.released}</p>
