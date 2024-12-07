@@ -29,7 +29,6 @@ client.connect().then(() => {
 const googleClient = new OAuth2Client("159976334384-t5n83o9qjbscgugor7kpo5j65sjldrh5.apps.googleusercontent.com");
 
 // Routes
-
 app.get("/api/test", async (req, res) => {
   const json = await gamesCollection.find().toArray();
   res.json(json);
@@ -95,8 +94,9 @@ app.post("/google-login", async (req, res) => {
       idToken: token,
       audience: "159976334384-t5n83o9qjbscgugor7kpo5j65sjldrh5.apps.googleusercontent.com",
     });
-
-    const { email, name } = ticket.getPayload();
+    const payload = ticket.getPayload();
+    console.log(payload);
+    const { email, name } = payload;
 
     // Check if user exists, if not, create a new user
     let user = await gamesCollection.findOne({ email });
