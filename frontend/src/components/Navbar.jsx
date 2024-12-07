@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import styles from './navbar.module.css';
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login page after logout
+  };
 
   return (
     <div className={styles.navbar}>
@@ -40,7 +46,7 @@ const Navbar = () => {
             <Link to={`/profile/${user.username}`} className={styles.profileButton}>
               Profile
             </Link>
-            <button onClick={logout} className={styles.logoutButton}>
+            <button onClick={handleLogout} className={styles.logoutButton}>
               Logout
             </button>
           </>
