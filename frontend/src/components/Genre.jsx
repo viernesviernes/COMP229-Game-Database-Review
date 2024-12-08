@@ -21,8 +21,6 @@ const Genre = () => {
       const data = await response.json();
       setGames(data.results);
       setTotalPages(Math.ceil(data.count / 12)); // Update total pages based on 12 games per page
-      console.log(data.results);
-      console.log(genre);
     } catch (error) {
       console.error("Error fetching games by genre:", error);
     } finally {
