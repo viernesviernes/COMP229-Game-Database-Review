@@ -1,40 +1,52 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./gameDetails.module.css";
-import Navbar from './Navbar'; // Import Navbar
+import Navbar from './Navbar';
 import { UserContext } from '../UserContext';
 
 const GameDetails = () => {
   const { id } = useParams(); // Retrieve the game ID from the URL
   const { user } = useContext(UserContext); // Access the user data from UserContext
   const [gameDetails, setGameDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(null); // Track if game is in favorites
+  const [loading, setLoading] = useState(true); // General loading state for the page
+  const [favoritesLoading, setFavoritesLoading] = useState(true); // Loading state for favorites
+  const [isFavorite, setIsFavorite] = useState(false); // Track if game is in favorites
 
   const fetchGameDetails = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
+
       // Fetch game data
       const response = await fetch(
         `https://api.rawg.io/api/games/${id}?key=5b98ed2b9ead46e3a6c09e45ae262fc3`
       );
       const data = await response.json();
       setGameDetails(data);
-
-      // Fetch user favorites
-      const fetchedFavs = await fetch(
-        `${import.meta.env.VITE_BACKEND_URI}/api/profile/mjviernes`
-      )
-        .then(response => response.json())
-        .then(dict => dict[0].favorites || []);
-
-      // Check if the current game is a favorite
-      const fetchedFavIds = fetchedFavs.map(fav => Number(fav.id)); // Ensure IDs are numbers
-      setIsFavorite(fetchedFavIds.includes(Number(id)));
     } catch (error) {
       console.error("Error fetching game details:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkFavorites = async () => {
+    try {
+      setFavoritesLoading(true);
+
+      // Fetch user's favorites
+      const fetchedFavs = await fetch(
+        `${import.meta.env.VITE_BACKEND_URI}/api/profile/${user.username}`
+      )
+        .then((response) => response.json())
+        .then((dict) => dict[0].favorites || []);
+
+      // Check if the current game is in favorites
+      const fetchedFavIds = fetchedFavs.map((fav) => Number(fav.id));
+      setIsFavorite(fetchedFavIds.includes(Number(id)));
+    } catch (error) {
+      console.error("Error fetching favorites:", error);
+    } finally {
+      setFavoritesLoading(false);
     }
   };
 
@@ -47,16 +59,14 @@ const GameDetails = () => {
         },
         body: JSON.stringify({ id: gameDetails.id }),
       });
-      const result = await response.json();
-
       if (response.ok) {
         setIsFavorite(true);
         alert("Game added to favorites!");
       } else {
-        alert(result.error || "Failed to add to favorites.");
+        alert("Failed to add to favorites.");
       }
     } catch (error) {
-      console.error("Error adding to favorites: ", error);
+      console.error("Error adding to favorites:", error);
     }
   };
 
@@ -69,25 +79,24 @@ const GameDetails = () => {
         },
         body: JSON.stringify({ id: gameDetails.id }),
       });
-      const result = await response.json();
-
       if (response.ok) {
         setIsFavorite(false);
         alert("Game removed from favorites!");
       } else {
-        alert(result.error || "Failed to remove from favorites.");
+        alert("Failed to remove from favorites.");
       }
     } catch (error) {
-      console.error("Error removing from favorites: ", error);
+      console.error("Error removing from favorites:", error);
     }
   };
 
   useEffect(() => {
     fetchGameDetails();
+    checkFavorites();
   }, [id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Loading game details...</p>;
   }
 
   if (!gameDetails) {
@@ -105,15 +114,15 @@ const GameDetails = () => {
           className={styles.gameImage}
         />
         <div className={styles.favourites}>
-          {isFavorite === null ? (
+          {favoritesLoading ? (
             <p>Checking favorites...</p>
-          ) : !isFavorite ? (
-            <button onClick={addToFavorites} id="buttonAdd">
-              Add to Favorites
-            </button>
-          ) : (
+          ) : isFavorite ? (
             <button onClick={removeFromFavorites} id="buttonRemove">
               Remove from Favorites
+            </button>
+          ) : (
+            <button onClick={addToFavorites} id="buttonAdd">
+              Add to Favorites
             </button>
           )}
         </div>
