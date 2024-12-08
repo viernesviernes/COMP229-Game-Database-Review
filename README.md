@@ -71,15 +71,15 @@ Gamers often struggle to find a central hub to manage their favorite games and d
 
 ## Screenshots
 
-<img width="1440" alt="Login or Sign in page" src="Screenshot 2024-12-07 231839.png">
+<img width="1440" alt="Login or Sign in page" src="/frontend/Screenshot 2024-12-07 231839.png">
 
-<img width="1440" alt="Home Page" src="Screenshot 2024-12-07 232321.png">
+<img width="1440" alt="Home Page" src="/frontend/Screenshot 2024-12-07 232321.png">
 
-<img width="1440" alt="Game page" src="Screenshot 2024-12-07 232409.png">
+<img width="1440" alt="Game page" src="/frontend/Screenshot 2024-12-07 232409.png">
 
-<img width="1440" alt="Game" src="Screenshot 2024-12-07 232840.png">
+<img width="1440" alt="Game" src="/frontend/Screenshot 2024-12-07 232840.png">
 
-<img width="1440" alt="Profile Page" src="Screenshot 2024-12-07 232730.png">
+<img width="1440" alt="Profile Page" src="/frontend/Screenshot 2024-12-07 232730.png">
 
 
 ## Contributors
