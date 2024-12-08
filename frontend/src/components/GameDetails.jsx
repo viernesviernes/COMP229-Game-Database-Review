@@ -37,6 +37,7 @@ const GameDetails = () => {
       const fetchedFavs = await fetch(
         `${import.meta.env.VITE_BACKEND_URI}/api/profile/${user.username}`
       )
+        console.log(user.username)
         .then((response) => response.json())
         .then((dict) => dict[0].favorites || []);
 
