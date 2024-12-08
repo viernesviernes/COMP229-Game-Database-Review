@@ -40,8 +40,10 @@ const GameDetails = () => {
         .then((response) => response.json())
         .then(async (dict) => {dict[0].favorites || [];
           console.log(dict[0].favorites)
-          const fetchedFavIds = dict[0].favorites.map((fav) => Number(fav.id));
+          const fetchedFavIds = dict[0].favorites;
           console.log(fetchedFavIds);
+          console.log(id);
+          console.log(Number(id));
           console.log(fetchedFavIds.includes(Number(id)));
           setIsFavorite(fetchedFavIds.includes(Number(id)));
         });
