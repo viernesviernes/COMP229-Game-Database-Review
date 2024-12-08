@@ -39,21 +39,10 @@ const GameDetails = () => {
       )
         .then((response) => response.json())
         .then(async (dict) => {dict[0].favorites || [];
-          console.log(dict[0].favorites)
           const fetchedFavIds = dict[0].favorites;
-          console.log(fetchedFavIds);
-          console.log(id);
-          console.log(Number(id));
-          console.log(fetchedFavIds.includes(Number(id)));
           setIsFavorite(fetchedFavIds.includes(Number(id)));
         });
 
-      // Check if the current game is in favorites
-      console.log(user.username);
-      console.log(isFavorite);
-
-      // const fetchedFavIds = fetchedFavs.map((fav) => Number(fav.id));
-      // setIsFavorite(fetchedFavIds.includes(Number(id)));
     } catch (error) {
       console.error("Error fetching favorites:", error);
     } finally {
