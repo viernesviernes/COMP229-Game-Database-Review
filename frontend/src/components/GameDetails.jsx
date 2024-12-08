@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "./gameDetails.module.css";
 import Navbar from './Navbar';
 import { UserContext } from '../UserContext';
+import emptyGameImage from './emptygame.jpg';
 
 const GameDetails = () => {
   const { id } = useParams(); // Retrieve the game ID from the URL
@@ -109,7 +110,7 @@ const GameDetails = () => {
       <div className={styles.container}>
         <h1>{gameDetails.name}</h1>
         <img
-          src={gameDetails.background_image}
+          src={gameDetails.background_image || emptyGameImage}
           alt={gameDetails.name}
           className={styles.gameImage}
         />
