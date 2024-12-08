@@ -44,9 +44,9 @@ const GameDetails = () => {
 
       // Check if the current game is in favorites
       console.log(user.username)
+      console.log(fetchedFavs);
 
       const fetchedFavIds = fetchedFavs.map((fav) => Number(fav.id));
-      console.log(fetchedFavIds);
       setIsFavorite(fetchedFavIds.includes(Number(id)));
     } catch (error) {
       console.error("Error fetching favorites:", error);
