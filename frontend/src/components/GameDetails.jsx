@@ -41,6 +41,7 @@ const GameDetails = () => {
         .then(async (dict) => {dict[0].favorites || [];
           console.log(dict[0].favorites)
           const fetchedFavIds = dict[0].favorites.map((fav) => Number(fav.id));
+          console.log(fetchedFavIds);
           console.log(fetchedFavIds.includes(Number(id)));
           setIsFavorite(fetchedFavIds.includes(Number(id)));
         });
