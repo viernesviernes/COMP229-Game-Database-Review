@@ -27,26 +27,30 @@ const Navbar = () => {
         </div>
       </div>
       <div className={styles.navLinks}>
-        <Link to="/games" onClick={!user ? handleDisabledClick : null}>
-          Games
-        </Link>
-        <div className={styles.dropdown}>
-          <span>Genre ▼</span>
-          <div className={styles.dropdownContent}>
-            <Link to="/genre/action" onClick={!user ? handleDisabledClick : null}>
-              Action
+        {user && (
+          <>
+            <Link to="/games" onClick={!user ? handleDisabledClick : null}>
+              Games
             </Link>
-            <Link to="/genre/adventure" onClick={!user ? handleDisabledClick : null}>
-              Adventure
+            <div className={styles.dropdown}>
+              <span>Genre ▼</span>
+              <div className={styles.dropdownContent}>
+                <Link to="/genre/action" onClick={!user ? handleDisabledClick : null}>
+                  Action
+                </Link>
+                <Link to="/genre/adventure" onClick={!user ? handleDisabledClick : null}>
+                  Adventure
+                </Link>
+                <Link to="/genre/role-playing-games-rpg" onClick={!user ? handleDisabledClick : null}>
+                  RPG
+                </Link>
+              </div>
+            </div>
+            <Link to="/latest" onClick={!user ? handleDisabledClick : null}>
+              Latest
             </Link>
-            <Link to="/genre/role-playing-games-rpg" onClick={!user ? handleDisabledClick : null}>
-              RPG
-            </Link>
-          </div>
-        </div>
-        <Link to="/latest" onClick={!user ? handleDisabledClick : null}>
-          Latest
-        </Link>
+          </>
+        )}
       </div>
       <div className={styles.authButtons}>
         {!user ? (
