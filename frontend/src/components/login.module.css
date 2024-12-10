@@ -108,20 +108,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  width: 100%; /* Full width */
   padding: 14px;
-  background: #ffffff;
+  margin: 0 auto; /* Centers the button horizontally */
   border: 1px solid #d1d5db;
   border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
   font-size: 16px;
-  cursor: pointer;
+  font-weight: 600;
   transition: all 0.3s ease;
-  margin-top: 15px;
+  cursor: pointer;
 }
 
 .googleButton:hover {
-  background: #f4f4f4;
-  border-color: #c1c1c1;
+  background-color: #e0e0e0;
+}
+
+.googleIcon {
+  font-size: 18px;
 }
 
 .divider {

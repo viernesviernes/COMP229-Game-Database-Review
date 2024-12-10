@@ -1,17 +1,17 @@
-import React, { useState, useContext } from 'react';
-import Navbar from './Navbar';
-import { useNavigate } from 'react-router-dom';
-import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
-import { ThemeContext } from '../ColorTheme';
-import { UserContext } from '../UserContext';
-import { GoogleLogin } from '@react-oauth/google';
-import styles from './login.module.css';
+import React, { useState, useContext } from "react";
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { ThemeContext } from "../ColorTheme";
+import { UserContext } from "../UserContext";
+import { GoogleLogin } from "@react-oauth/google";
+import styles from "./login.module.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const { login, googleLogin } = useContext(UserContext);
@@ -20,26 +20,26 @@ const Login = () => {
     e.preventDefault();
     const result = await login(username, password);
     if (result.success) {
-      navigate('/home');
+      navigate("/home");
     } else {
       setError(result.error);
     }
   };
 
   const handleGoogleLoginSuccess = async (credentialResponse) => {
-    console.log('Google Login Successful:', credentialResponse);
+    console.log("Google Login Successful:", credentialResponse);
     const token = credentialResponse.credential;
     const result = await googleLogin(token);
     if (result.success) {
-      navigate('/home');
+      navigate("/home");
     } else {
       setError(result.error);
     }
   };
 
   const handleGoogleLoginError = () => {
-    console.error('Google Login Failed');
-    setError('Google Login failed. Please try again.');
+    console.error("Google Login Failed");
+    setError("Google Login failed. Please try again.");
   };
 
   return (
@@ -63,7 +63,7 @@ const Login = () => {
             <div className={styles.inputGroup}>
               <FaLock className={styles.icon} />
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -89,18 +89,19 @@ const Login = () => {
             onError={handleGoogleLoginError}
             render={(renderProps) => (
               <button
+                type="button"
                 className={styles.googleButton}
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
               >
                 <FaGoogle className={styles.googleIcon} />
-                Continue with Google
+                Sign in with Google
               </button>
             )}
           />
           <p className={styles.signupPrompt}>
-            Don't have an account?{' '}
-            <span onClick={() => navigate('/signup')}>Sign up</span>
+            Don't have an account?{" "}
+            <span onClick={() => navigate("/signup")}>Sign up</span>
           </p>
         </div>
       </div>
