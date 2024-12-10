@@ -110,20 +110,23 @@ const Signup = () => {
           <div className={styles.divider}>
             <span>or</span>
           </div>
-          <GoogleLogin
-            onSuccess={handleGoogleSignupSuccess}
-            onError={handleGoogleSignupError}
-            render={(renderProps) => (
-              <button
-                className={styles.googleButton}
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <FaGoogle className={styles.googleIcon} />
-                Continue with Google
-              </button>
-            )}
-          />
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginError}
+              render={(renderProps) => (
+                <button
+                  type="button"
+                  className={styles.googleButton}
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <FaGoogle className={styles.googleIcon} />
+                  Sign in with Google
+                </button>
+              )}
+            />
+          </div>
           <p className={styles.loginPrompt}>
             Already have an account?{" "}
             <span onClick={() => navigate("/login")}>Log in</span>
