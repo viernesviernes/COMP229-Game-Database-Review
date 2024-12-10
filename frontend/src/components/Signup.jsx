@@ -112,8 +112,8 @@ const Signup = () => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             <GoogleLogin
-              onSuccess={handleGoogleLoginSuccess}
-              onError={handleGoogleLoginError}
+              onSuccess={handleGoogleSignupSuccess}
+              onError={handleGoogleSignupError}
               render={(renderProps) => (
                 <button
                   type="button"
