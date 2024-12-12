@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from "react-router-dom"
 import Navbar from './Navbar'
 import styles from './profile.module.css'
+import emptyGameImage from './emptygame.jpg'
 
 function Profile() {
 
@@ -15,15 +16,12 @@ function Profile() {
         <Navbar />
         <div className={styles.container}>
             <div className={styles.head}>
-            <p>{username}</p>
+            <h3>@{username}</h3>
             </div>
             <div className={styles.tabs}>
                 <ul>
                     <li className={tabs == 0 ? styles.active : styles.inactive}>
                         <button onClick={() => {changeTabs(0)}} disabled={tabs == 0}>Favorites</button>
-                    </li>
-                    <li className={tabs == 1 ? styles.active : styles.inactive}>
-                        <button onClick={() => {changeTabs(1)}} disabled={tabs == 1}>Replies</button>
                     </li>
                 </ul>
                 {tabs == 0 ? <FPagination /> : <RPagination />}
@@ -66,7 +64,7 @@ function FPagination() {
           {games.map((game) => (
             <div key={game.id} className={styles.gameCard}>
               <img
-                src={game.background_image}
+                src={game.background_image || emptyGameImage}
                 alt={game.name}
                 className={styles.gameImage}
               />
@@ -92,4 +90,5 @@ function RPagination() {
         </>
     )
 }
+
 export default Profile
