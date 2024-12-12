@@ -11,12 +11,31 @@ function Profile() {
     // Favorites = 0, Replies = 1
     const [tabs, changeTabs] = useState(0);
 
+    const [favoritesAmt, getFavorites] = useState();
+
+    const fetchData = async () => {
+        let json = await fetch(`${import.meta.env.VITE_BACKEND_URI}/api/profile/${username}`);
+        let response = await json.json();
+
+        let { favorites } = await response[0];
+        
+        getFavorites(favorites.length);
+        console.log("data fetched");
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <>
         <Navbar />
         <div className={styles.container}>
             <div className={styles.head}>
-            <h3>@{username}</h3>
+                <div className={styles.headcontent}> 
+                    <h3>@{username}</h3>
+                    <p>Favorites: {favoritesAmt}</p>
+                </div>
             </div>
             <div className={styles.tabs}>
                 <ul>
@@ -79,14 +98,6 @@ function FPagination() {
             </div>
           ))}
         </div>
-        </>
-    )
-}
-
-function RPagination() {
-    return (
-        <>
-        
         </>
     )
 }
